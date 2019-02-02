@@ -55,7 +55,7 @@ public class CustumerControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void shoultGetClienteList() throws Exception {
+    public void shouldGetClienteList() throws Exception {
 
         List<CustumerDTO> custumerList = new ArrayList<>();
 
