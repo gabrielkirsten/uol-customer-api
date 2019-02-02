@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -85,6 +86,17 @@ public class CustumerServiceTest extends AbstractServiceTest {
         custumerService.updateCostumer(custumerDTO);
 
         verify(custumerRepository, times(1)).save(any(Custumer.class));
+
+    }
+
+    @Test
+    public void shouldDeleteCustomer() {
+
+        doNothing().when(custumerRepository).deleteById(any(Long.class));
+
+        custumerService.deleteCustomer(1L);
+
+        verify(custumerRepository, times(1)).deleteById(any(Long.class));
 
     }
 

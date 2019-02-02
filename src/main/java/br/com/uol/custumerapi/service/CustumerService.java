@@ -44,4 +44,8 @@ public class CustumerService {
         return new CustumerDTO().toDTO(custumerRepository.save(custumerDTO.fromDTO(custumerDTO)));
     }
 
+    public void deleteCustomer(Long id) {
+        custumerRepository.deleteById(id);
+    }
+
 }
