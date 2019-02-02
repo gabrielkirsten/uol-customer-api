@@ -77,6 +77,17 @@ public class CustumerServiceTest extends AbstractServiceTest {
 
     }
 
+    @Test
+    public void shouldUpdateACustumer() {
+
+        when(custumerRepository.save(any(Custumer.class))).thenReturn(custumerDTO.fromDTO(custumerDTO));
+
+        custumerService.updateCostumer(custumerDTO);
+
+        verify(custumerRepository, times(1)).save(any(Custumer.class));
+
+    }
+
     @Override
     @Before
     public void setUp() {

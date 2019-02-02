@@ -40,4 +40,8 @@ public class CustumerService {
 
     }
 
+    public CustumerDTO updateCostumer(CustumerDTO custumerDTO) {
+        return new CustumerDTO().toDTO(custumerRepository.save(custumerDTO.fromDTO(custumerDTO)));
+    }
+
 }

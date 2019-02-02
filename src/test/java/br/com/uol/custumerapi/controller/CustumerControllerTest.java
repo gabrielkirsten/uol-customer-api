@@ -14,6 +14,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -70,6 +71,23 @@ public class CustumerControllerTest extends AbstractControllerTest {
                 .andExpect(jsonPath("$[0].id", is(custumerDTO.getId().intValue())))
                 .andExpect(jsonPath("$[0].name", is(custumerDTO.getName())))
                 .andExpect(jsonPath("$[0].age", is(custumerDTO.getAge())));
+
+    }
+
+    @Test
+    public void shouldPutCliente() throws Exception {
+
+        when(custumerService.updateCostumer(any(CustumerDTO.class))).thenReturn(custumerDTO);
+
+        mockMvc.perform(put("/custumers")
+                .contentType(APPLICATION_JSON_UTF8)
+                .content("{\"id\" : 1, \"nome\" : \"Gabriel Kirsten Menezes\", \"age\" : 24}")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.name", is("Gabriel Kirsten Menezes")))
+                .andExpect(jsonPath("$.age", is(24)));
 
     }
 
