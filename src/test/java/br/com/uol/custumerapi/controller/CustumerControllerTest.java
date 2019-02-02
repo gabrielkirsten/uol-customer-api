@@ -5,10 +5,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -35,7 +39,40 @@ public class CustumerControllerTest extends AbstractControllerTest {
 
     }
 
-    @Override
+    @Test
+    public void shouldGetCliente() throws Exception {
+
+        when(custumerService.getCostumerById(custumerDTO.getId())).thenReturn(custumerDTO);
+
+        mockMvc.perform(get("/custumers/1")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.id", is(custumerDTO.getId().intValue())))
+                .andExpect(jsonPath("$.name", is(custumerDTO.getName())))
+                .andExpect(jsonPath("$.age", is(custumerDTO.getAge())));
+
+    }
+
+    @Test
+    public void shoultGetClienteList() throws Exception {
+
+        List<CustumerDTO> custumerList = new ArrayList<>();
+
+        custumerList.add(custumerDTO);
+
+        when(custumerService.getAllCustumers()).thenReturn(custumerList);
+
+        mockMvc.perform(get("/custumers/")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$[0].id", is(custumerDTO.getId().intValue())))
+                .andExpect(jsonPath("$[0].name", is(custumerDTO.getName())))
+                .andExpect(jsonPath("$[0].age", is(custumerDTO.getAge())));
+
+    }
+
     @Before
     public void setUp() {
         super.setUp();

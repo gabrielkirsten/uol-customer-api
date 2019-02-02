@@ -3,6 +3,7 @@ package br.com.uol.custumerapi.model.dto;
 import br.com.uol.custumerapi.model.Custumer;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class CustumerDTO extends DTOMapper<CustumerDTO, Custumer> implements Serializable {
 
@@ -46,4 +47,18 @@ public class CustumerDTO extends DTOMapper<CustumerDTO, Custumer> implements Ser
         return CustumerDTO.class;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CustumerDTO that = (CustumerDTO) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(age, that.age);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, age);
+    }
 }
