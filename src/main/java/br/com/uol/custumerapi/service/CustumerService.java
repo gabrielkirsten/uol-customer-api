@@ -3,6 +3,7 @@ package br.com.uol.custumerapi.service;
 import br.com.uol.custumerapi.model.Custumer;
 import br.com.uol.custumerapi.model.dto.CustumerDTO;
 import br.com.uol.custumerapi.repository.CustumerRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import java.util.List;
 
 @Service
 public class CustumerService {
+
+    private List<CustumerDTO> custumers;
 
     private CustumerRepository custumerRepository;
 
@@ -22,6 +25,7 @@ public class CustumerService {
         return new CustumerDTO().toDTO(newCustumer);
     }
 
+    @Cacheable("custumers")
     public CustumerDTO getCostumerById(Long id) {
         return new CustumerDTO().toDTO(custumerRepository.getById(id));
     }
