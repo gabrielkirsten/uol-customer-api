@@ -26,12 +26,12 @@ public class CustumerController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity getCostumer(@PathVariable Long id) {
-        return ResponseEntity.ok(custumerService.getCostumerById(id));
+    public ResponseEntity getCustumer(@PathVariable Long id) {
+        return ResponseEntity.ok(custumerService.getCustumerById(id));
     }
 
     @GetMapping
-    public ResponseEntity getCostumer() {
+    public ResponseEntity getCustumer() {
         return ResponseEntity.ok(custumerService.getAllCustumers());
     }
 

@@ -42,7 +42,7 @@ public class CustumerServiceTest extends AbstractServiceTest {
 
         when(custumerRepository.getById(custumerDTO.getId())).thenReturn(new CustumerDTO().fromDTO(custumerDTO));
 
-        CustumerDTO retornedCustumerDTO = custumerService.getCostumerById(custumerDTO.getId());
+        CustumerDTO retornedCustumerDTO = custumerService.getCustumerById(custumerDTO.getId());
 
         assertTrue(custumerDTO.equals(retornedCustumerDTO));
 

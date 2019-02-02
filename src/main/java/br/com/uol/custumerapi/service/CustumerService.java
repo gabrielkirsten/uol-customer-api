@@ -26,7 +26,7 @@ public class CustumerService {
     }
 
     @Cacheable("custumers")
-    public CustumerDTO getCostumerById(Long id) {
+    public CustumerDTO getCustumerById(Long id) {
         return new CustumerDTO().toDTO(custumerRepository.getById(id));
     }
 

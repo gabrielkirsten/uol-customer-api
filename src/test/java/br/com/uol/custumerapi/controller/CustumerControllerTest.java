@@ -42,7 +42,7 @@ public class CustumerControllerTest extends AbstractControllerTest {
     @Test
     public void shouldGetCliente() throws Exception {
 
-        when(custumerService.getCostumerById(custumerDTO.getId())).thenReturn(custumerDTO);
+        when(custumerService.getCustumerById(custumerDTO.getId())).thenReturn(custumerDTO);
 
         mockMvc.perform(get("/custumers/1")
                 .accept(MediaType.APPLICATION_JSON))
