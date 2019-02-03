@@ -1,6 +1,6 @@
-package br.com.uol.custumerapi.service;
+package br.com.uol.customerapi.service;
 
-import br.com.uol.custumerapi.repository.CustumerRepository;
+import br.com.uol.customerapi.repository.CustomerRepository;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -14,14 +14,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 public abstract class AbstractServiceTest {
 
     @MockBean
-    protected CustumerRepository custumerRepository;
+    protected CustomerRepository customerRepository;
 
     @Autowired
-    protected CustumerService custumerService;
+    protected CustomerService customerService;
 
     @Before
     public void setUp() {
-        Mockito.reset(custumerRepository);
+        Mockito.reset(customerRepository);
     }
 
 }

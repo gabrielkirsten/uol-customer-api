@@ -1,4 +1,4 @@
-package br.com.uol.custumerapi.model.dto;
+package br.com.uol.customerapi.model.dto;
 
 import java.util.List;
 

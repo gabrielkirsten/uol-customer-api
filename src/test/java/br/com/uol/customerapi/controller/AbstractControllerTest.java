@@ -1,6 +1,6 @@
-package br.com.uol.custumerapi.controller;
+package br.com.uol.customerapi.controller;
 
-import br.com.uol.custumerapi.service.CustumerService;
+import br.com.uol.customerapi.service.CustomerService;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -18,11 +18,11 @@ public abstract class AbstractControllerTest {
     protected MockMvc mockMvc;
 
     @MockBean
-    protected CustumerService custumerService;
+    protected CustomerService customerService;
 
     @Before
     public void setUp() {
-        Mockito.reset(custumerService);
+        Mockito.reset(customerService);
     }
 
 }

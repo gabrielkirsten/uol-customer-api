@@ -1,11 +1,11 @@
-package br.com.uol.custumerapi.model.dto;
+package br.com.uol.customerapi.model.dto;
 
-import br.com.uol.custumerapi.model.Custumer;
+import br.com.uol.customerapi.model.Customer;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public class CustumerDTO extends DTOMapper<CustumerDTO, Custumer> implements Serializable {
+public class CustomerDTO extends DTOMapper<CustomerDTO, Customer> implements Serializable {
 
     private Long id;
 
@@ -38,20 +38,20 @@ public class CustumerDTO extends DTOMapper<CustumerDTO, Custumer> implements Ser
     }
 
     @Override
-    public Class<Custumer> returnModelClass() {
-        return Custumer.class;
+    public Class<Customer> returnModelClass() {
+        return Customer.class;
     }
 
     @Override
-    public Class<CustumerDTO> returnDTOClass() {
-        return CustumerDTO.class;
+    public Class<CustomerDTO> returnDTOClass() {
+        return CustomerDTO.class;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CustumerDTO that = (CustumerDTO) o;
+        CustomerDTO that = (CustomerDTO) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(age, that.age);

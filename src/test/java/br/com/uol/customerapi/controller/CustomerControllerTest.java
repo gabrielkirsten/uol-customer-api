@@ -1,6 +1,6 @@
-package br.com.uol.custumerapi.controller;
+package br.com.uol.customerapi.controller;
 
-import br.com.uol.custumerapi.model.dto.CustumerDTO;
+import br.com.uol.customerapi.model.dto.CustomerDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
@@ -19,67 +19,67 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class CustumerControllerTest extends AbstractControllerTest {
+public class CustomerControllerTest extends AbstractControllerTest {
 
-    private CustumerDTO custumerDTO = new CustumerDTO();
+    private CustomerDTO customerDTO = new CustomerDTO();
 
     @Test
-    public void shouldPostCustumer() throws Exception {
+    public void shouldPostCustomer() throws Exception {
 
-        when(custumerService.addNewCustumer(any(CustumerDTO.class))).thenReturn(custumerDTO);
+        when(customerService.addNewCustomer(any(CustomerDTO.class))).thenReturn(customerDTO);
 
-        mockMvc.perform(post("/custumers").accept(MediaType.APPLICATION_JSON)
+        mockMvc.perform(post("/customers").accept(MediaType.APPLICATION_JSON)
                 .contentType(APPLICATION_JSON_UTF8)
                 .content("{\"id\" : 1, \"nome\" : \"Gabriel Kirsten Menezes\", \"age\" : 24}")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.id", is(custumerDTO.getId().intValue())))
-                .andExpect(jsonPath("$.name", is(custumerDTO.getName())))
-                .andExpect(jsonPath("$.age", is(custumerDTO.getAge())));
+                .andExpect(jsonPath("$.id", is(customerDTO.getId().intValue())))
+                .andExpect(jsonPath("$.name", is(customerDTO.getName())))
+                .andExpect(jsonPath("$.age", is(customerDTO.getAge())));
 
     }
 
     @Test
-    public void shouldGetCliente() throws Exception {
+    public void shouldGetCustomer() throws Exception {
 
-        when(custumerService.getCustumerById(custumerDTO.getId())).thenReturn(custumerDTO);
+        when(customerService.getCustomerById(customerDTO.getId())).thenReturn(customerDTO);
 
-        mockMvc.perform(get("/custumers/1")
+        mockMvc.perform(get("/customers/1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.id", is(custumerDTO.getId().intValue())))
-                .andExpect(jsonPath("$.name", is(custumerDTO.getName())))
-                .andExpect(jsonPath("$.age", is(custumerDTO.getAge())));
+                .andExpect(jsonPath("$.id", is(customerDTO.getId().intValue())))
+                .andExpect(jsonPath("$.name", is(customerDTO.getName())))
+                .andExpect(jsonPath("$.age", is(customerDTO.getAge())));
 
     }
 
     @Test
-    public void shouldGetClienteList() throws Exception {
+    public void shouldGetAllCustomers() throws Exception {
 
-        List<CustumerDTO> custumerList = new ArrayList<>();
+        List<CustomerDTO> customerList = new ArrayList<>();
 
-        custumerList.add(custumerDTO);
+        customerList.add(customerDTO);
 
-        when(custumerService.getAllCustumers()).thenReturn(custumerList);
+        when(customerService.getAllCustomers()).thenReturn(customerList);
 
-        mockMvc.perform(get("/custumers/")
+        mockMvc.perform(get("/customers/")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$[0].id", is(custumerDTO.getId().intValue())))
-                .andExpect(jsonPath("$[0].name", is(custumerDTO.getName())))
-                .andExpect(jsonPath("$[0].age", is(custumerDTO.getAge())));
+                .andExpect(jsonPath("$[0].id", is(customerDTO.getId().intValue())))
+                .andExpect(jsonPath("$[0].name", is(customerDTO.getName())))
+                .andExpect(jsonPath("$[0].age", is(customerDTO.getAge())));
 
     }
 
     @Test
     public void shouldPutCliente() throws Exception {
 
-        when(custumerService.updateCostumer(any(CustumerDTO.class))).thenReturn(custumerDTO);
+        when(customerService.updateCostomer(any(CustomerDTO.class))).thenReturn(customerDTO);
 
-        mockMvc.perform(put("/custumers")
+        mockMvc.perform(put("/customers")
                 .contentType(APPLICATION_JSON_UTF8)
                 .content("{\"id\" : 1, \"nome\" : \"Gabriel Kirsten Menezes\", \"age\" : 24}")
                 .accept(MediaType.APPLICATION_JSON))
@@ -95,8 +95,8 @@ public class CustumerControllerTest extends AbstractControllerTest {
     public void setUp() {
         super.setUp();
 
-        custumerDTO.setId(1L);
-        custumerDTO.setName("Gabriel Kirsten Menezes");
-        custumerDTO.setAge(24);
+        customerDTO.setId(1L);
+        customerDTO.setName("Gabriel Kirsten Menezes");
+        customerDTO.setAge(24);
     }
 }
