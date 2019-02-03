@@ -30,7 +30,7 @@ public class CustomerRegistrationLogService {
 
         CustomerRegistrationLog customerRegistrationLog = new CustomerRegistrationLog();
 
-            Location location = ipLocalizerService.getLocalByIp(IP);
+        Location location = ipLocalizerService.getLocalByIp(IP);
         Weather weather = metaWeatherService.getWeather(location, new Date());
         customerRegistrationLog.setMaxTemperature(weather.getMaxTemperature());
         customerRegistrationLog.setMinTemperature(weather.getMinTemperature());
