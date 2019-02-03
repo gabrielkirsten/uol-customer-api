@@ -8,6 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableCaching
 @EnableFeignClients
+@EnableCircuitBreaker
 @SpringBootApplication
 public class CustomerApiApplication {
 
