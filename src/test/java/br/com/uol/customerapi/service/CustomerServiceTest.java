@@ -31,8 +31,9 @@ public class CustomerServiceTest extends AbstractServiceTest {
         customerSaved.setAge(customerDTOWithoutID.getAge());
 
         when(customerRepository.save(any(Customer.class))).thenReturn(customerSaved);
+        when(customerRegistrationLogService.createNew(any(Customer.class), any(String.class))).thenReturn(null);
 
-        customerService.addNewCustomer(customerDTOWithoutID);
+        customerService.addNewCustomer(customerDTOWithoutID, null);
 
         verify(customerRepository, times(1)).save(any(Customer.class));
 

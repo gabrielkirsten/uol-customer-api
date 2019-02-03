@@ -3,6 +3,9 @@ package br.com.uol.customerapi.service;
 import br.com.uol.customerapi.model.Customer;
 import br.com.uol.customerapi.model.dto.CustomerDTO;
 import br.com.uol.customerapi.repository.CustomerRepository;
+import org.aspectj.apache.bcel.generic.InstructionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +19,27 @@ public class CustomerService {
 
     private CustomerRepository customerRepository;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    private CustomerRegistrationLogService customerRegistrationLogService;
+
+    private Logger logger = LoggerFactory.getLogger(CustomerService.class);
+
+    public CustomerService(CustomerRepository customerRepository, CustomerRegistrationLogService customerRegistrationLogService) {
         this.customerRepository = customerRepository;
+        this.customerRegistrationLogService = customerRegistrationLogService;
     }
 
-    public CustomerDTO addNewCustomer(CustomerDTO customerDto) {
+    public CustomerDTO addNewCustomer(CustomerDTO customerDto, String requestSourceIP) {
+
         Customer newCustomer = customerRepository.save(customerDto.fromDTO(customerDto));
+
+        try {
+            customerRegistrationLogService.createNew(newCustomer, requestSourceIP);
+        } catch (Exception e) {
+            logger.error("Error generating Customer Registration Log Service, Log not generated!");
+        }
+
         return new CustomerDTO().toDTO(newCustomer);
+
     }
 
     @Cacheable("customers")

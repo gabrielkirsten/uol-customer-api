@@ -26,7 +26,7 @@ public class CustomerControllerTest extends AbstractControllerTest {
     @Test
     public void shouldPostCustomer() throws Exception {
 
-        when(customerService.addNewCustomer(any(CustomerDTO.class))).thenReturn(customerDTO);
+        when(customerService.addNewCustomer(any(CustomerDTO.class), any(String.class))).thenReturn(customerDTO);
 
         mockMvc.perform(post("/customers").accept(MediaType.APPLICATION_JSON)
                 .contentType(APPLICATION_JSON_UTF8)
@@ -75,7 +75,7 @@ public class CustomerControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void shouldPutCliente() throws Exception {
+    public void shouldPutCustomer() throws Exception {
 
         when(customerService.updateCostomer(any(CustomerDTO.class))).thenReturn(customerDTO);
 

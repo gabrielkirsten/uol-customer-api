@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("customers")
 public class CustomerController {
@@ -24,8 +26,8 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity postCustomer(@RequestBody CustomerDTO customerDto) {
-        return ResponseEntity.ok(customerService.addNewCustomer(customerDto));
+    public ResponseEntity postCustomer(@RequestBody CustomerDTO customerDto, HttpServletRequest request) {
+        return ResponseEntity.ok(customerService.addNewCustomer(customerDto, request.getRemoteAddr()));
     }
 
     @GetMapping(value = "/{id}")
