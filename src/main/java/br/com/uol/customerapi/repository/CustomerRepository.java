@@ -3,8 +3,10 @@ package br.com.uol.customerapi.repository;
 import br.com.uol.customerapi.model.Customer;
 import org.springframework.data.repository.CrudRepository;
 
-public interface CustomerRepository extends CrudRepository<Customer, Long> {
+import java.util.UUID;
 
-    Customer getById(Long id);
+public interface CustomerRepository extends CrudRepository<Customer, UUID> {
+
+    Customer getById(UUID id);
 
 }

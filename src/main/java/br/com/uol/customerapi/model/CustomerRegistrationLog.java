@@ -9,14 +9,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Table(name = "customer_registration_logs")
 public class CustomerRegistrationLog {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     @Column(name = "MAX_TEMPERATURE")
     private BigDecimal maxTemperature;
@@ -28,11 +29,11 @@ public class CustomerRegistrationLog {
     @JoinColumn(name = "CUSTOMER_ID")
     private Customer customer;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

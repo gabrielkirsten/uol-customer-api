@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
@@ -30,11 +31,11 @@ public class CustomerControllerTest extends AbstractControllerTest {
 
         mockMvc.perform(post("/customers").accept(MediaType.APPLICATION_JSON)
                 .contentType(APPLICATION_JSON_UTF8)
-                .content("{\"id\" : 1, \"nome\" : \"Gabriel Kirsten Menezes\", \"age\" : 24}")
+                .content("{\"nome\" : \"Gabriel Kirsten Menezes\", \"age\" : 24}")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.id", is(customerDTO.getId().intValue())))
+                .andExpect(jsonPath("$.id", is(customerDTO.getId().toString())))
                 .andExpect(jsonPath("$.name", is(customerDTO.getName())))
                 .andExpect(jsonPath("$.age", is(customerDTO.getAge())));
 
@@ -45,11 +46,11 @@ public class CustomerControllerTest extends AbstractControllerTest {
 
         when(customerService.getCustomerById(customerDTO.getId())).thenReturn(customerDTO);
 
-        mockMvc.perform(get("/customers/1")
+        mockMvc.perform(get("/customers/"+customerDTO.getId())
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.id", is(customerDTO.getId().intValue())))
+                .andExpect(jsonPath("$.id", is(customerDTO.getId().toString())))
                 .andExpect(jsonPath("$.name", is(customerDTO.getName())))
                 .andExpect(jsonPath("$.age", is(customerDTO.getAge())));
 
@@ -68,7 +69,7 @@ public class CustomerControllerTest extends AbstractControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$[0].id", is(customerDTO.getId().intValue())))
+                .andExpect(jsonPath("$[0].id", is(customerDTO.getId().toString())))
                 .andExpect(jsonPath("$[0].name", is(customerDTO.getName())))
                 .andExpect(jsonPath("$[0].age", is(customerDTO.getAge())));
 
@@ -81,11 +82,11 @@ public class CustomerControllerTest extends AbstractControllerTest {
 
         mockMvc.perform(put("/customers")
                 .contentType(APPLICATION_JSON_UTF8)
-                .content("{\"id\" : 1, \"nome\" : \"Gabriel Kirsten Menezes\", \"age\" : 24}")
+                .content("{\"id\" : \""+customerDTO.getId()+"\", \"name\" : \"Gabriel Kirsten Menezes\", \"age\" : 24}")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.id", is(customerDTO.getId().toString())))
                 .andExpect(jsonPath("$.name", is("Gabriel Kirsten Menezes")))
                 .andExpect(jsonPath("$.age", is(24)));
 
@@ -95,7 +96,7 @@ public class CustomerControllerTest extends AbstractControllerTest {
     public void setUp() {
         super.setUp();
 
-        customerDTO.setId(1L);
+        customerDTO.setId(UUID.randomUUID());
         customerDTO.setName("Gabriel Kirsten Menezes");
         customerDTO.setAge(24);
     }

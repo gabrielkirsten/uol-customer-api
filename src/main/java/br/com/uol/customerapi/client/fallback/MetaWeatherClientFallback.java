@@ -1,4 +1,4 @@
-package br.com.uol.customerapi.client.hystrix;
+package br.com.uol.customerapi.client.fallback;
 
 import br.com.uol.customerapi.domain.metaweather.ConsolidatedWeatherMetaWeather;
 import br.com.uol.customerapi.domain.metaweather.LocationSearchMetaWeather;

@@ -4,20 +4,21 @@ import br.com.uol.customerapi.model.Customer;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 public class CustomerDTO extends DTOMapper<CustomerDTO, Customer> implements Serializable {
 
-    private Long id;
+    private UUID id;
 
     private String name;
 
     private Integer age;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

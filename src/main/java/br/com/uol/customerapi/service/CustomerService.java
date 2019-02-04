@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CustomerService {
@@ -43,7 +44,7 @@ public class CustomerService {
     }
 
     @Cacheable("customers")
-    public CustomerDTO getCustomerById(Long id) {
+    public CustomerDTO getCustomerById(UUID id) {
         return new CustomerDTO().toDTO(customerRepository.getById(id));
     }
 
@@ -61,7 +62,7 @@ public class CustomerService {
         return new CustomerDTO().toDTO(customerRepository.save(customerDTO.fromDTO(customerDTO)));
     }
 
-    public void deleteCustomer(Long id) {
+    public void deleteCustomer(UUID id) {
         customerRepository.deleteById(id);
     }
 
