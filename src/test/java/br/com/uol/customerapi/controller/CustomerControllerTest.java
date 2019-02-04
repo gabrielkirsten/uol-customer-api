@@ -1,16 +1,27 @@
 package br.com.uol.customerapi.controller;
 
 import br.com.uol.customerapi.model.dto.CustomerDTO;
+import br.com.uol.customerapi.service.CustomerService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
@@ -22,9 +33,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class CustomerControllerTest extends AbstractControllerTest {
+@RunWith(MockitoJUnitRunner.class)
+public class CustomerControllerTest {
 
     private CustomerDTO customerDTO = new CustomerDTO();
+
+    private MockMvc mockMvc;
+
+    @Mock
+    private CustomerService customerService;
+
+    @InjectMocks
+    private CustomerController customerController;
 
     @Test
     public void shouldPostCustomer() throws Exception {
@@ -107,10 +127,12 @@ public class CustomerControllerTest extends AbstractControllerTest {
 
     @Before
     public void setUp() {
-        super.setUp();
-
         customerDTO.setId(UUID.randomUUID());
         customerDTO.setName("Gabriel Kirsten Menezes");
         customerDTO.setAge(24);
+
+        mockMvc = MockMvcBuilders.standaloneSetup(customerController).build();
+
+        Mockito.reset(customerService);
     }
 }

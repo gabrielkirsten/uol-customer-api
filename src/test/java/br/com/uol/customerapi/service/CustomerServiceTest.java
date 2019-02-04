@@ -2,8 +2,15 @@ package br.com.uol.customerapi.service;
 
 import br.com.uol.customerapi.model.Customer;
 import br.com.uol.customerapi.model.dto.CustomerDTO;
+import br.com.uol.customerapi.repository.CustomerRepository;
+import br.com.uol.customerapi.service.thirdparties.MetaWeatherService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +24,20 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.junit.Assert.*;
 
-public class CustomerServiceTest extends AbstractServiceTest {
+@RunWith(MockitoJUnitRunner.Silent.class)
+public class CustomerServiceTest {
+
+    @Mock
+    protected CustomerRepository customerRepository;
+
+    @Mock
+    protected CustomerRegistrationLogService customerRegistrationLogService;
+
+    @Mock
+    protected MetaWeatherService metaWeatherService;
+
+    @InjectMocks
+    protected CustomerService customerService;
 
     private CustomerDTO customerDTOWithoutID = new CustomerDTO();
 
@@ -102,11 +122,8 @@ public class CustomerServiceTest extends AbstractServiceTest {
 
     }
 
-    @Override
     @Before
     public void setUp() {
-
-        super.setUp();
 
         customerDTO.setId(UUID.randomUUID());
         customerDTO.setAge(24);
@@ -114,6 +131,8 @@ public class CustomerServiceTest extends AbstractServiceTest {
 
         customerDTOWithoutID.setAge(24);
         customerDTOWithoutID.setName("Gabriel Kirsten Menezes");
+
+        Mockito.reset(customerRepository, customerRegistrationLogService, metaWeatherService);
 
     }
 
