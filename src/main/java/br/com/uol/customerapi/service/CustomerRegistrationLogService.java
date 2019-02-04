@@ -14,11 +14,11 @@ import java.util.Date;
 @Service
 public class CustomerRegistrationLogService {
 
-    IpLocalizerService ipLocalizerService;
+    private IpLocalizerService ipLocalizerService;
 
-    MetaWeatherService metaWeatherService;
+    private MetaWeatherService metaWeatherService;
 
-    CustomerRegistrationLogRepository customerRegistrationLogRepository;
+    private CustomerRegistrationLogRepository customerRegistrationLogRepository;
 
     public CustomerRegistrationLogService(IpLocalizerService ipLocalizerService, MetaWeatherService metaWeatherService, CustomerRegistrationLogRepository customerRegistrationLogRepository) {
         this.ipLocalizerService = ipLocalizerService;

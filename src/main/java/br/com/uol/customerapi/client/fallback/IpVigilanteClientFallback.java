@@ -1,12 +1,12 @@
-package br.com.uol.customerapi.feign.hystrix;
+package br.com.uol.customerapi.client.hystrix;
 
 import br.com.uol.customerapi.domain.ipvigilante.IpVigilante;
-import br.com.uol.customerapi.feign.IpVigilanteFeign;
+import br.com.uol.customerapi.client.IpVigilanteClient;
 import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class IpVigilanteClientFallback implements IpVigilanteFeign {
+public class IpVigilanteClientFallback implements IpVigilanteClient {
 
     private final Throwable cause;
 

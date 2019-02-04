@@ -6,7 +6,7 @@ import br.com.uol.customerapi.domain.metaweather.ConsolidatedWeatherMetaWeather;
 import br.com.uol.customerapi.domain.metaweather.LocationSearchMetaWeather;
 import br.com.uol.customerapi.exception.LocationNotFoundException;
 import br.com.uol.customerapi.exception.WeatherNotFoundException;
-import br.com.uol.customerapi.feign.MetaWeatherFeign;
+import br.com.uol.customerapi.client.MetaWeatherClient;
 import br.com.uol.customerapi.util.DateUtil;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +18,10 @@ import java.util.List;
 @Service
 public class MetaWeatherService {
 
-    private MetaWeatherFeign metaWeatherFeign;
+    private MetaWeatherClient metaWeatherClient;
 
-    public MetaWeatherService(MetaWeatherFeign metaWeatherFeign) {
-        this.metaWeatherFeign = metaWeatherFeign;
+    public MetaWeatherService(MetaWeatherClient metaWeatherClient) {
+        this.metaWeatherClient = metaWeatherClient;
     }
 
     public Weather getWeather(Location location, Date date) {
@@ -37,7 +37,7 @@ public class MetaWeatherService {
 
         String queryString = location.getLatitude().toString() + "," + location.getLongitude().toString();
 
-        List<LocationSearchMetaWeather> locationSearchMetaWeather = metaWeatherFeign.searchWeatherOfCoordinates(queryString);
+        List<LocationSearchMetaWeather> locationSearchMetaWeather = metaWeatherClient.searchWeatherOfCoordinates(queryString);
 
         return locationSearchMetaWeather.stream()
                 .min(Comparator.comparing(LocationSearchMetaWeather::getDistance))
@@ -47,7 +47,7 @@ public class MetaWeatherService {
 
     private ConsolidatedWeatherMetaWeather getConsolidatedWeatherOnTheDateOfLocationSearch(LocationSearchMetaWeather locationSearchMetaWeather, Date date) {
 
-        List<ConsolidatedWeatherMetaWeather> locationMetaWeather = metaWeatherFeign.getConsolidatedWeatherOfLocation(locationSearchMetaWeather.getWoeid(), DateUtil.convertToPattern("yyyy/MM/dd", date));
+        List<ConsolidatedWeatherMetaWeather> locationMetaWeather = metaWeatherClient.getConsolidatedWeatherOfLocation(locationSearchMetaWeather.getWoeid(), DateUtil.convertToPattern("yyyy/MM/dd", date));
 
         return locationMetaWeather.stream()
                 .findFirst()

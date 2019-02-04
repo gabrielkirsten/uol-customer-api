@@ -1,16 +1,16 @@
-package br.com.uol.customerapi.feign.hystrix;
+package br.com.uol.customerapi.client.hystrix;
 
 import br.com.uol.customerapi.domain.metaweather.ConsolidatedWeatherMetaWeather;
 import br.com.uol.customerapi.domain.metaweather.LocationSearchMetaWeather;
 import br.com.uol.customerapi.exception.WeatherNotFoundException;
-import br.com.uol.customerapi.feign.MetaWeatherFeign;
+import br.com.uol.customerapi.client.MetaWeatherClient;
 import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class MetaWeatherClientFallback implements MetaWeatherFeign {
+public class MetaWeatherClientFallback implements MetaWeatherClient {
 
     private final Throwable cause;
 
