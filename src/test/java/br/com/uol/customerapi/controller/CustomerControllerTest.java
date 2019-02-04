@@ -11,8 +11,10 @@ import java.util.UUID;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -89,6 +91,17 @@ public class CustomerControllerTest extends AbstractControllerTest {
                 .andExpect(jsonPath("$.id", is(customerDTO.getId().toString())))
                 .andExpect(jsonPath("$.name", is("Gabriel Kirsten Menezes")))
                 .andExpect(jsonPath("$.age", is(24)));
+
+    }
+
+    @Test
+    public void shouldDeleteACustomer() throws Exception {
+
+        doNothing().when(customerService).deleteCustomer(any(UUID.class));
+
+        mockMvc.perform(delete("/customers/"+customerDTO.getId())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(204));
 
     }
 
