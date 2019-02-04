@@ -10,28 +10,28 @@ A API construída trabalha no formato JSON (https://www.json.org/).
 }  
 ```  
 Onde:
-- id(UUID): Identificador único do *customer* (cliente).
-- name(String): Nome do *customer* (cliente).
+- id (UUID): Identificador único do *customer* (cliente).
+- name (String): Nome do *customer* (cliente).
 - age (Integer): Idade do *customer* (cliente).
 
 ### Consultar um Cliente por id  
 **Method**: GET    
 **URL**: http://localhost:8080/rest/costumers/{id}    
-**Retorna**: Objeto *customer* requisitado.
+**Retorna**: Objeto *customer* requisitado.    
 **Parâmetros**: 
 	- id: ID do cliente a ser consultado.
     
 ### Criar um Cliente    
 **Method**: POST    
 **URL**: http://localhost:8080/rest/costumers    
-**Retorna**: Objeto *customer* adicionado.
+**Retorna**: Objeto *customer* adicionado.    
 **Parâmetros**: 
 	- Objeto *customer* no corpo da requisição.
 
 ### Alterar um Cliente    
 **Method**: PUT    
 **URL**: http://localhost:8080/rest/costumers    
-**Retorna**: Objeto *customer* alterado.
+**Retorna**: Objeto *customer* alterado.    
 **Parâmetros**: 
 	- Objeto *customer* no corpo da requisição.
     
