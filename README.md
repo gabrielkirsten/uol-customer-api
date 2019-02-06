@@ -46,7 +46,10 @@ Onde:
 **Parâmetros**: 
 	- id: ID do cliente a ser deletado.
 	
-*A API possui também uma documentação que pode ser acessada pelo link [http://localhost:8080/rest/swagger-ui.html](http://localhost:8080/rest/swagger-ui.html)*
+*A API possui também uma documentação, gerada pelo swagger, que pode ser acessada pelo link [http://localhost:8080/rest/swagger-ui.html](http://localhost:8080/rest/swagger-ui.html)*
+
+![Swagger](https://github.com/gabrielkirsten/uol-customer-api/blob/master/doc/swagger-screenshot.png?raw=true)
+
     
 ## Quais ferramentas foram usadas? (e porque foram as escolhidas) 
 ### - Linguagem  
@@ -70,6 +73,12 @@ Para construir os DTOs dos objetos retornados, foi utilizado o modelmapper (http
 Para esse ponto foi utilizado o **Feign** do Spring Cloud, que permite a escrita de clientes para WEB Services mais simples e padronizados.    
 #### Circuit Breaker (Hystrix)  
 O Spring Feign também permite a integração com o **Hystrix**, O Hystrix foi utilizado para que seja possível configurar os fallbacks do Feign.
+
+### - Documentação da API
+Foi utilizado o [Swagger](https://swagger.io/), escolhido por oferecer uma maneira fácil e interativa para criação da documentação.
+
+### - Deploy
+Foi utilizado o [Docker](https://www.docker.com/) para criar uma imagem facilitando o deploy em produção e desenvolvimento.
   
 ## Como executar, testar, empacotar e entregar o projeto 
 
@@ -98,6 +107,8 @@ Foi adicionada uma nova tabela no banco de dados (customer_registration_logs), q
     
 ## Instruções para como montar o ambiente de produção onde os serviços devem ser executados  
 O projeto conta com o Docker para auxiliar o deploy em produção. 
+Caso o ambiente de produção conte com uma ferramenta de CI, o script `docker-build.sh`, localizado na raiz do projeto, oferece uma maneira de automatizar o **build** do projeto e da imagem do Docker. 
+A imagem Docker também está disponivel no Docker Hub através do link [https://hub.docker.com/r/gabrielkirsten/uol-customer-api](https://hub.docker.com/r/gabrielkirsten/uol-customer-api)
   
 ## Descrição do problema 
 Premissas:    
