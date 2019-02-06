@@ -45,6 +45,8 @@ Onde:
 **URL**: http://localhost:8080/rest/costumers/{id}    
 **Parâmetros**: 
 	- id: ID do cliente a ser deletado.
+	
+*A API possui também uma documentação que pode ser acessada pelo link [http://localhost:8080/rest/swagger-ui.html](http://localhost:8080/rest/swagger-ui.html)*
     
 ## Quais ferramentas foram usadas? (e porque foram as escolhidas) 
 ### - Linguagem  
@@ -95,6 +97,7 @@ Foi adicionada uma nova tabela no banco de dados (customer_registration_logs), q
 - **CUSTOMER_ID**: ID do customer (cliente) adicionado.  
     
 ## Instruções para como montar o ambiente de produção onde os serviços devem ser executados  
+O projeto conta com o Docker para auxiliar o deploy em produção. 
   
 ## Descrição do problema 
 Premissas:    
