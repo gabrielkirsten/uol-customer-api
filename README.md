@@ -64,13 +64,13 @@ Para facilitar a execução, foi utilizado um *in-memory database*, chamado  [H2
 **ATENÇÃO**: O banco de dados possui uma memória **volátil**, para cada inicialização da aplicação o banco será reconstruído!  
 
 ### - Acesso aos dados
-Para o acesso aos dados foi utilizado o **Spring Data JPA**, que fornece uma abstração simples de acesso aos dados e independente da tecnologia de banco de dados utilizada. 
+Para o acesso aos dados foi utilizado o [Spring Data JPA](https://spring.io/projects/spring-data), que fornece uma abstração simples de acesso aos dados e independente da tecnologia de banco de dados utilizada. 
     
 ### - Construção dos DTOs 
-Para construir os DTOs dos objetos retornados, foi utilizado o modelmapper (http://modelmapper.org/). Oferece uma maneira fácil de converter um objeto em outro (no caso, uma entidade para um DTO da entidade).  
+Para construir os DTOs dos objetos retornados, foi utilizado o [modelmapper](http://modelmapper.org/). Oferece uma maneira fácil de converter um objeto em outro (no caso, uma entidade para um DTO da entidade).  
   
 ### - Comunicação com as APIs de terceiros  
-Para esse ponto foi utilizado o **Feign** do Spring Cloud, que permite a escrita de clientes para WEB Services mais simples e padronizados.    
+Para esse ponto foi utilizado o [Feign](https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-feign.html) do Spring Cloud, que permite a escrita de clientes para WEB Services mais simples e padronizados.    
 #### Circuit Breaker (Hystrix)  
 O Spring Feign também permite a integração com o **Hystrix**, O Hystrix foi utilizado para que seja possível configurar os fallbacks do Feign.
 
