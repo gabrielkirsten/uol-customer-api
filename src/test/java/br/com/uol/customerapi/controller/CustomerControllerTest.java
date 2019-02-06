@@ -8,10 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -53,7 +50,7 @@ public class CustomerControllerTest {
 
         mockMvc.perform(post("/customers").accept(MediaType.APPLICATION_JSON)
                 .contentType(APPLICATION_JSON_UTF8)
-                .content("{\"nome\" : \"Gabriel Kirsten Menezes\", \"age\" : 24}")
+                .content("{\"name\" : \"Gabriel Kirsten Menezes\", \"age\" : 24}")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
