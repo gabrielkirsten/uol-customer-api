@@ -24,7 +24,7 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(new ApiInfo(
-                        "UOL Custumer API",
+                        "UOL Customer API",
                         "",
                         "v0",
                         "",
