@@ -3,7 +3,6 @@ package br.com.uol.customerapi.service;
 import br.com.uol.customerapi.model.Customer;
 import br.com.uol.customerapi.model.dto.CustomerDTO;
 import br.com.uol.customerapi.repository.CustomerRepository;
-import org.aspectj.apache.bcel.generic.InstructionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,7 +15,7 @@ import java.util.UUID;
 @Service
 public class CustomerService {
 
-    private List<CustomerDTO> customers;
+    private CustomerDTO customers;
 
     private CustomerRepository customerRepository;
 
@@ -43,7 +42,7 @@ public class CustomerService {
 
     }
 
-    @Cacheable("customers")
+    @Cacheable("customer")
     public CustomerDTO getCustomerById(UUID id) {
         return new CustomerDTO().toDTO(customerRepository.getById(id));
     }
