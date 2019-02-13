@@ -32,7 +32,7 @@ public class CustomerController {
     @ApiOperation(value = "Create customer")
     @PostMapping
     public ResponseEntity postCustomer(@RequestBody CustomerDTO customerDto, HttpServletRequest request) {
-        return ResponseEntity.ok(customerService.addNewCustomer(customerDto, request.getRemoteAddr()));
+        return new ResponseEntity<>(customerService.addNewCustomer(customerDto, request.getRemoteAddr()), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Get customer by id")
