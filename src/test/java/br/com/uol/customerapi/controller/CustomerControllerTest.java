@@ -52,7 +52,7 @@ public class CustomerControllerTest {
                 .contentType(APPLICATION_JSON_UTF8)
                 .content("{\"name\" : \"Gabriel Kirsten Menezes\", \"age\" : 24}")
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.id", is(customerDTO.getId().toString())))
                 .andExpect(jsonPath("$.name", is(customerDTO.getName())))
@@ -118,7 +118,7 @@ public class CustomerControllerTest {
 
         mockMvc.perform(delete("/customers/"+customerDTO.getId())
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().is(204));
+                .andExpect(status().is2xxSuccessful());
 
     }
 
